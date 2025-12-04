@@ -9,8 +9,8 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { siteConfig } from "../config/site.config"
-import { layoutConfig } from "../config/layout.config"
+import { siteConfig } from "../../config/site.config"
+import { layoutConfig } from "../../config/layout.config"
 
 export const Logo = () => {
   return <Image src='/pizza.png' height={26} width={26} alt='Pizzas' />
