@@ -34,12 +34,18 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main
-            className={`flex justify-center items-center h-[calc(100vh-${layoutConfig.headerHeight}-${layoutConfig.footerHeight})] flex-col w-full`}
+            className={`flex justify-center items-center flex-col w-full`}
+            style={{
+              height: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`,
+            }}
           >
             {children}
           </main>
           <footer
-            className={`flex justify-center items-center h-[${layoutConfig.footerHeight}]`}
+            className={`flex justify-center items-center `}
+            style={{
+              height: `${layoutConfig.footerHeight}`,
+            }}
           >
             <p>{siteConfig.description}</p>
           </footer>
