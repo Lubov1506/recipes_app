@@ -1,10 +1,12 @@
+'use client'
+
 import { Button, Form, Input } from "@heroui/react"
 import { useState } from "react"
 
 interface IProps {
   onClose: () => void
 }
-const SignupForm = ({ onClose }: IProps) => {
+const RegistrationForm = ({ onClose }: IProps) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -89,4 +91,4 @@ const SignupForm = ({ onClose }: IProps) => {
   )
 }
 
-export default SignupForm
+export default RegistrationForm

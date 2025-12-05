@@ -9,8 +9,11 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { siteConfig } from "../../config/site.config"
-import { layoutConfig } from "../../config/layout.config"
+import { siteConfig } from "../../../config/site.config"
+import { layoutConfig } from "../../../config/layout.config"
+import RegistrationModal from "../modals/registration.modal"
+import { useState } from "react"
+import LoginModal from "../modals/login.modal"
 
 export const Logo = () => {
   return <Image src='/pizza.png' height={26} width={26} alt='Pizzas' />
@@ -35,9 +38,10 @@ export default function Header() {
       )
     })
   }
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false)
+  const [isLoginOpen, setIsLoginOpen] = useState(false)
   return (
     <Navbar
-      
       style={{
         height: `${layoutConfig.headerHeight}`,
       }}
@@ -53,14 +57,33 @@ export default function Header() {
       </NavbarContent>
       <NavbarContent justify='end' className='p-0'>
         <NavbarItem className='hidden lg:flex'>
-          <Link href='#'>Login</Link>
+          <Button
+            as={Link}
+            color='success'
+            href='#'
+            variant='flat'
+            onPress={() => setIsLoginOpen(true)}
+          >
+            Sign Up
+          </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color='primary' href='#' variant='flat'>
+          <Button
+            as={Link}
+            color='primary'
+            href='#'
+            variant='flat'
+            onPress={() => setIsRegistrationOpen(true)}
+          >
             Sign Up
           </Button>
         </NavbarItem>
       </NavbarContent>
+      <RegistrationModal
+        isOpen={isRegistrationOpen}
+        onClose={() => setIsRegistrationOpen(false)}
+      />
+      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
     </Navbar>
   )
 }
