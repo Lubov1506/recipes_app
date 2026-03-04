@@ -14,6 +14,7 @@ import { layoutConfig } from "../../../config/layout.config"
 import RegistrationModal from "../modals/registration.modal"
 import { useState } from "react"
 import LoginModal from "../modals/login.modal"
+import signOutFunc from "@/src/actions/sign-out"
 
 export const Logo = () => {
   return (
@@ -21,7 +22,7 @@ export const Logo = () => {
       src='/pizza.png'
       height={26}
       width={26}
-      style={{ width: '26px', height: '26px' }}
+      style={{ width: "26px", height: "26px" }}
       alt='Pizzas'
     />
   )
@@ -48,6 +49,10 @@ export default function Header() {
   }
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
+
+  // const handleSignOut = async () => {
+  //   await signOutFunc()
+  // }
   return (
     <Navbar
       style={{
@@ -70,9 +75,20 @@ export default function Header() {
             color='success'
             href='#'
             variant='flat'
+            // onPress={handleSignOut}
+          >
+            Sign Out
+          </Button>
+        </NavbarItem>
+        <NavbarItem className='hidden lg:flex'>
+          <Button
+            as={Link}
+            color='success'
+            href='#'
+            variant='flat'
             onPress={() => setIsLoginOpen(true)}
           >
-            Sign Up
+            Sign In
           </Button>
         </NavbarItem>
         <NavbarItem>

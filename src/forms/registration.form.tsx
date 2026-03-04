@@ -1,7 +1,7 @@
 "use client"
 
 import { Button, Form, Input } from "@heroui/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { registerUser } from "../actions/register"
 
 interface IProps {
