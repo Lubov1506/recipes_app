@@ -1,7 +1,8 @@
-'use client'
+"use client"
 
 import { Button, Form, Input } from "@heroui/react"
 import { useState } from "react"
+import { registerUser } from "../actions/register"
 
 interface IProps {
   onClose: () => void
@@ -16,9 +17,12 @@ const RegistrationForm = ({ onClose }: IProps) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     return emailRegex.test(email)
   }
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault()
     console.log("Submitted", formData)
+    const result = await registerUser(formData)
+    console.log(result)
+
     onClose()
   }
   return (
@@ -65,7 +69,7 @@ const RegistrationForm = ({ onClose }: IProps) => {
         name='confirmPassword'
         placeholder='confirm password'
         type='password'
-        value={formData.password}
+        value={formData.confirmPassword}
         classNames={{
           inputWrapper: "bg-default-100",
           input: "text-sm focus:outline-none",
