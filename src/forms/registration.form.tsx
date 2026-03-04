@@ -17,7 +17,7 @@ const RegistrationForm = ({ onClose }: IProps) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     return emailRegex.test(email)
   }
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log("Submitted", formData)
     const result = await registerUser(formData)

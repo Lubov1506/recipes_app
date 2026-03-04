@@ -16,7 +16,15 @@ import { useState } from "react"
 import LoginModal from "../modals/login.modal"
 
 export const Logo = () => {
-  return <Image src='/pizza.png' height={26} width={26} alt='Pizzas' />
+  return (
+    <Image
+      src='/pizza.png'
+      height={26}
+      width={26}
+      style={{ width: '26px', height: '26px' }}
+      alt='Pizzas'
+    />
+  )
 }
 
 export default function Header() {
