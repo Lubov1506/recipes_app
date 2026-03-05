@@ -10,8 +10,8 @@ import prisma from "../lib/prisma"
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
-  session: { 
-    strategy: "jwt" // ЦЕ ОБОВ'ЯЗКОВО для Credentials + PrismaAdapter
+  session: {
+    strategy: "jwt",
   },
   providers: [
     Credentials({
@@ -19,11 +19,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      
 
       authorize: async (credentials) => {
-        console.log(credentials, 'credentials');
-        
+        console.log(credentials, "credentials")
+
         try {
           if (!credentials?.email || !credentials?.password) {
             console.log("1")
@@ -32,8 +31,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const { email, password } = await signInSchema.parseAsync(credentials)
           // const email = credentials?.email;
           // const password = credentials?.password;
-          console.log(email, password, 'email, password');
-          
+          console.log(email, password, "email, password")
+
           const user = await getUserFromDb(email)
           console.log(user, "user lubov")
 
@@ -58,7 +57,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null
         }
       },
-  
     }),
   ],
+  callbacks:{
+    async jwt({token, user}){
+      if(user){
+        token.id = user.id
+      }
+      return token 
+    }
+  }
 })

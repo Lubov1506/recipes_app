@@ -15,6 +15,7 @@ import RegistrationModal from "../modals/registration.modal"
 import { useState } from "react"
 import LoginModal from "../modals/login.modal"
 import signOutFunc from "@/src/actions/sign-out"
+import { useSession } from "next-auth/react"
 
 export const Logo = () => {
   return (
@@ -30,6 +31,10 @@ export const Logo = () => {
 
 export default function Header() {
   const pathname = usePathname()
+  const {data: session, status} = useSession()
+  console.log(session, 'session');
+  console.log(status, 'status');
+  
   const getNavItems = () => {
     return siteConfig.navItems.map((item) => {
       const isActive = pathname === item.href
