@@ -1,7 +1,7 @@
 "use client"
 
 import { Button, Form, Input } from "@heroui/react"
-import { useEffect, useState } from "react"
+import { startTransition, useEffect, useState } from "react"
 import { registerUser } from "../actions/register"
 
 interface IProps {
@@ -20,8 +20,10 @@ const RegistrationForm = ({ onClose }: IProps) => {
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log("Submitted", formData)
-    const result = await registerUser(formData)
-    console.log(result)
+    startTransition(async () => {
+      const result = await registerUser(formData)
+      console.log(result)
+    })
 
     onClose()
   }
