@@ -12,6 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 3600,
   },
   providers: [
     Credentials({
@@ -59,12 +60,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  callbacks:{
-    async jwt({token, user}){
-      if(user){
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
         token.id = user.id
       }
-      return token 
-    }
-  }
+      return token
+    },
+  },
 })

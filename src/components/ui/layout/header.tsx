@@ -31,10 +31,9 @@ export const Logo = () => {
 
 export default function Header() {
   const pathname = usePathname()
-  const {data: session, status} = useSession()
-  console.log(session, 'session');
-  console.log(status, 'status');
-  
+  const { data: session, status } = useSession()
+  const isAuth = status === "authenticated"
+
   const getNavItems = () => {
     return siteConfig.navItems.map((item) => {
       const isActive = pathname === item.href
@@ -55,9 +54,9 @@ export default function Header() {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
 
-  // const handleSignOut = async () => {
-  //   await signOutFunc()
-  // }
+  const handleSignOut = async () => {
+    await signOutFunc()
+  }
   return (
     <Navbar
       style={{
@@ -74,39 +73,45 @@ export default function Header() {
         {getNavItems()}
       </NavbarContent>
       <NavbarContent justify='end' className='p-0'>
-        <NavbarItem className='hidden lg:flex'>
-          <Button
-            as={Link}
-            color='success'
-            href='#'
-            variant='flat'
-            // onPress={handleSignOut}
-          >
-            Sign Out
-          </Button>
-        </NavbarItem>
-        <NavbarItem className='hidden lg:flex'>
-          <Button
-            as={Link}
-            color='success'
-            href='#'
-            variant='flat'
-            onPress={() => setIsLoginOpen(true)}
-          >
-            Sign In
-          </Button>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            as={Link}
-            color='primary'
-            href='#'
-            variant='flat'
-            onPress={() => setIsRegistrationOpen(true)}
-          >
-            Sign Up
-          </Button>
-        </NavbarItem>
+        {isAuth && <p>Hi, {session?.user?.email} </p>}
+        {!isAuth ? (
+          <>
+            <NavbarItem className='hidden lg:flex'>
+              <Button
+                as={Link}
+                color='success'
+                href='#'
+                variant='flat'
+                onPress={() => setIsLoginOpen(true)}
+              >
+                Sign In
+              </Button>
+            </NavbarItem>
+            <NavbarItem>
+              <Button
+                as={Link}
+                color='primary'
+                href='#'
+                variant='flat'
+                onPress={() => setIsRegistrationOpen(true)}
+              >
+                Sign Up
+              </Button>
+            </NavbarItem>
+          </>
+        ) : (
+          <NavbarItem className='hidden lg:flex'>
+            <Button
+              as={Link}
+              color='success'
+              href='#'
+              variant='flat'
+              onPress={handleSignOut}
+            >
+              Sign Out
+            </Button>
+          </NavbarItem>
+        )}
       </NavbarContent>
       <RegistrationModal
         isOpen={isRegistrationOpen}

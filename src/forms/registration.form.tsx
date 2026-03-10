@@ -19,10 +19,8 @@ const RegistrationForm = ({ onClose }: IProps) => {
   }
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("Submitted", formData)
     startTransition(async () => {
-      const result = await registerUser(formData)
-      console.log(result)
+      await registerUser(formData)
     })
 
     onClose()
