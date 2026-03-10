@@ -1,9 +1,11 @@
+import PageContent from "@/src/components/ui/common/page-content"
+
 const Page = () => {
   return (
     <div>
-      About
+      <PageContent />
     </div>
-  );
+  )
 }
 
-export default Page;
+export default Page

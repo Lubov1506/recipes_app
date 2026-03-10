@@ -1,3 +1,9 @@
+import PageContent from "../components/ui/common/page-content"
+
 export default function Home() {
-  return <h1>Hello from Home</h1>
+  return (
+    <>
+      <PageContent />
+    </>
+  )
 }

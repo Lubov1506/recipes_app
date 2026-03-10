@@ -1,5 +1,10 @@
+import PageContent from "@/src/components/ui/common/page-content"
+
 const Page = () => {
-  return <div></div>
+  return <div>
+      <PageContent />
+
+  </div>
 }
 
 export default Page
