@@ -1,20 +1,37 @@
 "use client"
 import { Button, Form, Input, Select, SelectItem } from "@heroui/react"
 import { CATEGORY_OPTIONS, UNIT_OPTIONS } from "../constants/select-options"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { createIngredient } from "../actions/ingredient"
+import { ZodError } from "zod"
 
+const initialState = {
+  name: "",
+  category: "",
+  unit: "",
+  pricePerUnit: null as number | null,
+  description: "",
+}
 const IngredientForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    category: "",
-    unit: "",
-    pricePerUnit: null as number | null,
-    description: "",
-  })
+  const [error, setError] = useState<string | null>(null)
+  const [formData, setFormData] = useState(initialState)
+
+  const [isPending, startTransition] = useTransition()
+
   const handleSubmit = async (formData: FormData) => {
-    console.log("form submitted", formData)
-    await createIngredient(formData)
+    startTransition(async () => {
+      const res = await createIngredient(formData)
+      if (res.error) {
+        if (res.error instanceof ZodError) {
+          const errorMessage =
+            res.error.issues[0]?.message || "Невірна валідація"
+          setError(errorMessage)
+        }
+      } else {
+        setError(null)
+        setFormData(initialState)
+      }
+    })
   }
   return (
     <Form
@@ -25,6 +42,7 @@ const IngredientForm = () => {
       }}
       className='w-100'
     >
+      {error && <p className='text-red-700 mb-2'>{error}</p>}
       <Input
         isRequired
         aria-label='name'
@@ -137,7 +155,7 @@ const IngredientForm = () => {
         }
       />
       <div className='flex w-full items-center justify-end'>
-        <Button color='primary' type='submit'>
+        <Button color='primary' type='submit' isLoading={isPending}>
           Add ingredient
         </Button>
       </div>
