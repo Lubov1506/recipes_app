@@ -2,6 +2,7 @@
 import { Button, Form, Input, Select, SelectItem } from "@heroui/react"
 import { CATEGORY_OPTIONS, UNIT_OPTIONS } from "../constants/select-options"
 import { useState } from "react"
+import { createIngredient } from "../actions/ingredient"
 
 const IngredientForm = () => {
   const [formData, setFormData] = useState({
@@ -11,12 +12,19 @@ const IngredientForm = () => {
     pricePerUnit: null as number | null,
     description: "",
   })
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (formData: FormData) => {
     console.log("form submitted", formData)
+    await createIngredient(formData)
   }
   return (
-    <Form onSubmit={handleSubmit} className='w-[400px]'>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault()
+        const formDataObj = new FormData(e.currentTarget)
+        handleSubmit(formDataObj)
+      }}
+      className='w-100'
+    >
       <Input
         isRequired
         aria-label='name'
