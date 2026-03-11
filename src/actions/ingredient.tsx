@@ -37,3 +37,26 @@ export async function createIngredient(formData: FormData) {
     return { error: "Create ingredient error" }
   }
 }
+export async function getIngredients() {
+  try {
+    const ingredients = await prisma.ingredient.findMany()
+    return { success: true, ingredients }
+  } catch (error) {
+    console.log(error, "error")
+    return { error: "GET ingredients error" }
+  }
+}
+
+export async function deleteIngredient(id: string) {
+  try {
+    const ingredient = await prisma.ingredient.delete({
+      where: {
+        id,
+      },
+    })
+    return { success: true, ingredient }
+  } catch (error) {
+    console.log(error, "error")
+    return { error: "DELETE ingredients error" }
+  }
+}

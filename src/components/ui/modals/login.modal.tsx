@@ -1,7 +1,7 @@
 "use client"
 
 import LoginForm from "@/src/forms/login.form"
-import CustomModal from "../common/modal"
+import CustomModal from "../../common/modal"
 interface IProps {
   onClose: () => void
   isOpen: boolean

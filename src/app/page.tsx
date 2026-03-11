@@ -1,4 +1,4 @@
-import PageContent from "../components/ui/common/page-content"
+import PageContent from "../components/common/page-content"
 
 export default function Home() {
   return (

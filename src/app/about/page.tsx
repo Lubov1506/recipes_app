@@ -1,4 +1,4 @@
-import PageContent from "@/src/components/ui/common/page-content"
+import PageContent from "@/src/components/common/page-content"
 
 const Page = () => {
   return (

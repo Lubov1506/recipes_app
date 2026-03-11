@@ -2,8 +2,7 @@
 import { Button, Form, Input, Select, SelectItem } from "@heroui/react"
 import { CATEGORY_OPTIONS, UNIT_OPTIONS } from "../constants/select-options"
 import { useState, useTransition } from "react"
-import { createIngredient } from "../actions/ingredient"
-import { ZodError } from "zod"
+import { useIngredientStore } from "../store/ingredient.store"
 
 const initialState = {
   name: "",
@@ -15,18 +14,15 @@ const initialState = {
 const IngredientForm = () => {
   const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState(initialState)
-
+  const { addIngredient } = useIngredientStore()
   const [isPending, startTransition] = useTransition()
 
   const handleSubmit = async (formData: FormData) => {
     startTransition(async () => {
-      const res = await createIngredient(formData)
-      if (res.error) {
-        if (res.error instanceof ZodError) {
-          const errorMessage =
-            res.error.issues[0]?.message || "Невірна валідація"
-          setError(errorMessage)
-        }
+      await addIngredient(formData)
+      const storeError = useIngredientStore.getState().error
+      if (storeError) {
+        setError(storeError)
       } else {
         setError(null)
         setFormData(initialState)
