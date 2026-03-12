@@ -36,7 +36,7 @@ const IngredientForm = () => {
         const formDataObj = new FormData(e.currentTarget)
         handleSubmit(formDataObj)
       }}
-      className='w-100'
+      className='w-full'
     >
       {error && <p className='text-red-700 mb-2'>{error}</p>}
       <Input

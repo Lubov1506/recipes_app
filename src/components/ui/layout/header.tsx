@@ -45,21 +45,23 @@ export default function Header() {
   }
 
   const getNavItems = () => {
-    return siteConfig.navItems.map((item) => {
-      const isActive = pathname === item.href
-      return (
-        <NavbarItem key={item.href}>
-          <Link
-            color='foreground'
-            href={item.href}
-            className={`hover:scale-75 hover:text transition-all duration-200
+    return siteConfig.navItems
+      .filter(item => item.href !== "/ingredients" || isAuth)
+      .map((item) => {
+        const isActive = pathname === item.href
+        return (
+          <NavbarItem key={item.href}>
+            <Link
+              color='foreground'
+              href={item.href}
+              className={`hover:scale-75 hover:text transition-all duration-200
             ${isActive && "text-teal-500"}`}
-          >
-            {item.label}
-          </Link>
-        </NavbarItem>
-      )
-    })
+            >
+              {item.label}
+            </Link>
+          </NavbarItem>
+        )
+      })
   }
 
   return (

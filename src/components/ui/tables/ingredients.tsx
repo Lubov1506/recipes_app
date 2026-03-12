@@ -1,3 +1,4 @@
+"use client"
 import { CATEGORY_OPTIONS, UNIT_OPTIONS } from "@/src/constants/select-options"
 import { useAuthStore } from "@/src/store/auth.store"
 import { useIngredientStore } from "@/src/store/ingredient.store"
@@ -26,7 +27,10 @@ const IngredientsTable = () => {
     const option = UNIT_OPTIONS.find((opt) => opt.value === value)
     return option ? option.label : value
   }
-  return (
+  if(!isAuth){
+    return <p>Unauthorized</p>
+  }
+  return !isLoading && isAuth ? (
     <Table
       aria-label='Ingredients list'
       classNames={{
@@ -69,6 +73,8 @@ const IngredientsTable = () => {
         ))}
       </TableBody>
     </Table>
+  ) : (
+    <p className='mt-4'>Loading ...</p>
   )
 }
 
