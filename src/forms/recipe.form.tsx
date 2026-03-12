@@ -97,6 +97,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
 
       <Input
         isRequired
+        aria-label='name'
         name='name'
         placeholder='Name'
         type='text'
@@ -111,6 +112,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
 
       <Input
         name='description'
+        aria-label='description'
         placeholder='Description (not required)'
         type='text'
         value={formData.description}
@@ -124,6 +126,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
       />
       <Input
         name='imageUrl'
+        aria-label='imageUrl'
         placeholder='URL image (not required)'
         type='url'
         value={formData.imageUrl}
@@ -138,6 +141,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
         {ingredientFields.map((field, index) => (
           <div key={field.id} className='flex gap-2 items-center'>
             <Select
+              aria-label={`ingredient_${index}`}
               isRequired
               name={`ingredient_${index}`}
               placeholder='Chose an ingredient'
@@ -160,6 +164,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
             </Select>
             <Input
               isRequired
+              aria-label={`quantity_${index}`}
               name={`quantity_${index}`}
               placeholder='Quantity'
               type='number'

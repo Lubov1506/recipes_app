@@ -1,9 +1,25 @@
-import PageContent from "../components/common/page-content"
+"use client"
+import Link from "next/link"
+import { useRecipeStore } from "../store/recipe.store"
+import { Button } from "@heroui/react"
+import RecipeCard from "../components/common/recipe-card"
 
 export default function Home() {
+  const { recipes, isLoading, error } = useRecipeStore()
   return (
     <>
-      <PageContent />
+      <div className='flex w-full mb-4 justify-center items-center'>
+        <Link href='recipe/new'>
+          <Button color='primary'>Create recipe</Button>
+        </Link>
+      </div>
+      {error && <p className='text-red-700'>{error}</p>}
+      {isLoading && <p>Loading ...</p>}
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.id} recipe={recipe} />
+        ))}
+      </div>
     </>
   )
 }
