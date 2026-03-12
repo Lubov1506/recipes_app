@@ -1,4 +1,5 @@
-import { success } from "zod"
+"use server"
+
 import prisma from "../lib/prisma"
 
 export async function getRecipes() {
@@ -38,7 +39,7 @@ export async function createRecipe(formData: FormData) {
         error: "Name and quantity at least 1 are required",
       }
     }
-    const recipe = prisma.recipe.create({
+    const recipe = await prisma.recipe.create({
       data: {
         name,
         description,
@@ -86,7 +87,7 @@ export async function updateRecipe(id: string, formData: FormData) {
       }
     }
 
-    const recipe = prisma.recipe.update({
+    const recipe = await prisma.recipe.update({
       where: { id },
       data: {
         name,
