@@ -1,3 +1,4 @@
+'use client'
 import RecipeForm from "@/src/forms/recipe.form"
 import { useRecipeStore } from "@/src/store/recipe.store"
 import { IRecipe } from "@/src/types/recipe"
@@ -9,6 +10,7 @@ const Page = () => {
   const { recipes, isLoading, error } = useRecipeStore()
   const [recipe, setRecipe] = useState<IRecipe | null>(null)
   const [hasSearched, setHasSearched] = useState(false)
+console.log(id);
 
   useEffect(() => {
     if (recipes.length > 0 || error) {

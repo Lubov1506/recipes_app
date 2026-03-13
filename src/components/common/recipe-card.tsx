@@ -75,7 +75,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
 
       {isAuth && (
         <div className='flex justify-end gap-2 p-4'>
-          <Link href={`/recipes/${recipe.id}`}>
+          <Link href={`/recipe/${recipe.id}`}>
             <Button color='primary' variant='light'>
               Update
             </Button>

@@ -25,7 +25,7 @@ export async function createRecipe(formData: FormData) {
     const description = formData.get("description") as string
     const imageUrl = formData.get("imageUrl") as string
     const ingredients = Array.from(formData.entries())
-      .filter(([key]) => key.startsWith("/ingredients"))
+      .filter(([key]) => key.startsWith("ingredient_"))
       .map(([key, value]) => ({
         ingredientId: value as string,
         quantity: parseFloat(
@@ -72,7 +72,7 @@ export async function updateRecipe(id: string, formData: FormData) {
     const description = formData.get("description") as string
     const imageUrl = formData.get("imageUrl") as string
     const ingredients = Array.from(formData.entries())
-      .filter(([key]) => key.startsWith("/ingredients"))
+      .filter(([key]) => key.startsWith("ingredient_"))
       .map(([key, value]) => ({
         ingredientId: value as string,
         quantity: parseFloat(

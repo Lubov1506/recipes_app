@@ -27,8 +27,15 @@ const IngredientsTable = () => {
     const option = UNIT_OPTIONS.find((opt) => opt.value === value)
     return option ? option.label : value
   }
-  if(!isAuth){
+  if (!isAuth) {
     return <p>Unauthorized</p>
+  }
+  if (ingredients.length === 0) {
+    return (
+      <>
+        <p className='text-center mt-2 text-xl'>No ingredients!</p>
+      </>
+    )
   }
   return !isLoading && isAuth ? (
     <Table

@@ -74,13 +74,14 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
   }
 
   const handleSubmit = async (formData: FormData) => {
+    console.log(formData);
     startTransition(async () => {
       setError(null)
 
       const result = initialRecipe
         ? await updateRecipe(initialRecipe.id, formData)
         : await addRecipe(formData)
-
+      
       if (result.success) {
         setIngredientFields([{ id: 0, ingredientId: "", quantity: null }])
         router.push("/")
