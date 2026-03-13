@@ -6,11 +6,8 @@ import parse from "html-react-parser"
 
 const PageContent = () => {
   const pathname = usePathname()
-  console.log(pathname, "pathname")
-
   const pageContent =
     siteConfig.pagesContent[pathname as keyof typeof siteConfig.pagesContent]
-  console.log(pageContent)
 
   if (!pageContent) {
     return <p>Page not found</p>

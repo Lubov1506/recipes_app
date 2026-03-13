@@ -6,7 +6,6 @@ import { ingredientSchema } from "../schema/zod"
 
 export async function createIngredient(formData: FormData) {
   try {
-    console.log("formData", formData)
     const data = {
       name: formData.get("name") as string,
       category: formData.get("category") as string,

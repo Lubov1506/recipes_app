@@ -10,7 +10,6 @@ const Page = () => {
   const { recipes, isLoading, error } = useRecipeStore()
   const [recipe, setRecipe] = useState<IRecipe | null>(null)
   const [hasSearched, setHasSearched] = useState(false)
-console.log(id);
 
   useEffect(() => {
     if (recipes.length > 0 || error) {

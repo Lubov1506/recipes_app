@@ -14,7 +14,6 @@ export default function AppLoader({ children }: IProps) {
   const { loadIngredients } = useIngredientStore()
   const { isAuth, setAuthState } = useAuthStore()
   const { loadRecipes } = useRecipeStore()
-// console.log(loadRecipes);
 
   useEffect(() => {
     setAuthState(status, session)

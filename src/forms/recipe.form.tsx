@@ -74,7 +74,6 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
   }
 
   const handleSubmit = async (formData: FormData) => {
-    console.log(formData);
     startTransition(async () => {
       setError(null)
 

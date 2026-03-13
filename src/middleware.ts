@@ -12,7 +12,6 @@ export async function middleware(request: NextRequest) {
     if (!token) {
       const url = new URL("/unauthorized", request.url)
       url.searchParams.set("message", "Not enough rights")
-      console.log(url);
       
       return NextResponse.redirect(url)
     }
